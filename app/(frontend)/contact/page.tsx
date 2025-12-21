@@ -18,7 +18,7 @@ const contactInfo = [
   },
   {
     title: 'Location',
-    value: 'EV Building, Concordia University, Montreal, QC',
+    value: '2160 Bishop St, Montreal, Quebec H3G 2E9, Canada',
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -168,22 +168,20 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Map Placeholder */}
+              {/* Google Map - B-Annex Concordia */}
               <div className="mt-12">
                 <div className="aspect-video bg-slate-200 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center flex-col gap-4">
-                    <svg className="w-16 h-16 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    <p className="text-slate-500 text-center">
-                      EV Building<br />
-                      Concordia University<br />
-                      Montreal, QC
-                    </p>
-                  </div>
-                  {/* Grid overlay */}
-                  <div className="absolute inset-0 grid-bg" />
+                  <iframe
+                    src="https://maps.google.com/maps?q=2160+Bishop+St,+Montreal,+QC+H3G+2E9,+Canada&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0"
+                    title="CSME Location - B-Annex, Concordia University"
+                  />
                 </div>
               </div>
             </div>

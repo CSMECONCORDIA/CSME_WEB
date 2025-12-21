@@ -20,7 +20,8 @@ export function ProjectCard({ project }: { project: Project }) {
   const hasImage = thumbnail?.url
 
   return (
-    <article className="group card-hover bg-white border border-slate-200 overflow-hidden">
+    <Link href={`/projects/${project.slug}`} className="block">
+      <article className="group card-hover bg-white border border-slate-200 overflow-hidden">
       {/* Image Container */}
       <div className="relative h-48 bg-slate-100 overflow-hidden">
         {hasImage ? (
@@ -29,6 +30,7 @@ export function ProjectCard({ project }: { project: Project }) {
             alt={thumbnail.alt || project.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
+            unoptimized
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-navy/10 to-navy/5">
@@ -100,5 +102,6 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
       </div>
     </article>
+    </Link>
   )
 }
