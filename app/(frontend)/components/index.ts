@@ -3,3 +3,14 @@ export { Footer } from './Footer'
 export { GearDecoration } from './GearDecoration'
 export { ProjectCard } from './ProjectCard'
 export { EventCard } from './EventCard'
+export { FadeIn, StaggerContainer, StaggerItem, ScaleIn } from './ScrollAnimations'
+export { GearModel3D } from './GearModel3D'
+export { HomeHero } from './HomeHero'
+export {
+  AnimatedSectionHeader,
+  AnimatedCardsGrid,
+  AnimatedCard,
+  AnimatedCTASection,
+  AnimatedFeaturedEvent,
+  AnimatedEventsList,
+} from './AnimatedSections'
