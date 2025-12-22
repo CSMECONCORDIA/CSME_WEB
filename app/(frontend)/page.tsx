@@ -39,7 +39,7 @@ export default async function HomePage() {
 
   return (
     <div className="relative">
-      {/* Hero Section with 3D Gear */}
+      {/* Hero Section */}
       <HomeHero />
 
       {/* Featured Event Section */}

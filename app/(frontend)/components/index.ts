@@ -4,7 +4,6 @@ export { GearDecoration } from './GearDecoration'
 export { ProjectCard } from './ProjectCard'
 export { EventCard } from './EventCard'
 export { FadeIn, StaggerContainer, StaggerItem, ScaleIn } from './ScrollAnimations'
-export { GearModel3D } from './GearModel3D'
 export { HomeHero } from './HomeHero'
 export {
   AnimatedSectionHeader,

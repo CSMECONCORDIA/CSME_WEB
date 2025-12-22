@@ -1,21 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import { FadeIn } from './ScrollAnimations'
 import { GearDecoration } from './GearDecoration'
-
-const GearModel3D = dynamic(
-  () => import('./GearModel3D').then((mod) => mod.GearModel3D),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-navy/20 border-t-navy rounded-full animate-spin" />
-      </div>
-    ),
-  }
-)
 
 export function HomeHero() {
   return (
@@ -33,9 +20,8 @@ export function HomeHero() {
       <div className="absolute top-2/3 right-0 w-1/3 h-px bg-gradient-to-l from-transparent via-navy/20 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Content */}
-          <FadeIn direction="left" duration={0.8}>
+        <div className="max-w-3xl">
+          <FadeIn direction="up" duration={0.8}>
             <div>
               <div className="hero-subtitle text-navy mb-4">
                 Canadian Society for Mechanical Engineering
@@ -76,26 +62,6 @@ export function HomeHero() {
                   <div className="text-4xl font-bold text-navy" style={{ fontFamily: 'var(--font-display)' }}>20+</div>
                   <div className="text-sm text-slate-500 uppercase tracking-wider mt-1">Events/Year</div>
                 </FadeIn>
-              </div>
-            </div>
-          </FadeIn>
-
-          {/* 3D Gear Model */}
-          <FadeIn direction="right" delay={0.2} duration={0.8}>
-            <div className="relative aspect-square max-w-lg mx-auto">
-              {/* Technical frame */}
-              <div className="absolute inset-4 border-2 border-navy/20" />
-              <div className="absolute inset-8 border border-navy/10" />
-
-              {/* Corner accents */}
-              <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-navy" />
-              <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-navy" />
-              <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-navy" />
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-navy" />
-
-              {/* 3D Gear */}
-              <div className="absolute inset-12 bg-gradient-to-br from-slate-50 to-white shadow-2xl">
-                <GearModel3D className="w-full h-full" />
               </div>
             </div>
           </FadeIn>
