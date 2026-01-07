@@ -21,12 +21,26 @@ function easeInOutCubic(t: number): number {
 export function RobotArmAssembly() {
   const groupRef = useRef<THREE.Group>(null)
   const scroll = useScroll()
-  const { scene } = useGLTF('/models/robot-arm.glb')
+  const { scene: baseScene } = useGLTF('/models/robot-arm.glb')
+  const { scene: upperScene } = useGLTF('/models/robot-arm-upper.glb')
   const partsDataRef = useRef<PartData[]>([])
   const initializedRef = useRef(false)
 
-  // Clone scene once
-  const clonedScene = useMemo(() => scene.clone(true), [scene])
+  // Clone and combine scenes
+  const clonedScene = useMemo(() => {
+    const group = new THREE.Group()
+
+    const base = baseScene.clone(true)
+    const upper = upperScene.clone(true)
+
+    // Add both to the group - position can be adjusted later
+    group.add(base)
+    group.add(upper)
+
+    console.log('Models loaded - base meshes:', base.children.length, 'upper meshes:', upper.children.length)
+
+    return group
+  }, [baseScene, upperScene])
 
   // Calculate bounding box and scaling
   const { center, scaleFactor } = useMemo(() => {
@@ -154,5 +168,6 @@ export function RobotArmAssembly() {
   )
 }
 
-// Preload the model
+// Preload the models
 useGLTF.preload('/models/robot-arm.glb')
+useGLTF.preload('/models/robot-arm-upper.glb')
