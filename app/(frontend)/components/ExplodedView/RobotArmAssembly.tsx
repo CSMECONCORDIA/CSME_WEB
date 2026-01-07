@@ -20,6 +20,7 @@ function easeInOutCubic(t: number): number {
 
 export function RobotArmAssembly() {
   const groupRef = useRef<THREE.Group>(null)
+  const scaleRef = useRef(0.3) // Start zoomed out
   const scroll = useScroll()
   const { scene: baseScene } = useGLTF('/models/robot-arm.glb')
   const { scene: upperScene } = useGLTF('/models/robot-arm-upper.glb')
@@ -100,9 +101,9 @@ export function RobotArmAssembly() {
         direction.normalize()
       }
 
-      // Calculate explosion offset (need to account for model scale)
+      // Calculate explosion offset - DRAMATIC: parts start way offscreen
       // Since we scale the model down, offsets need to be in model's original coordinate space
-      const explosionMagnitude = (3 + index * 0.5) / scaleFactor
+      const explosionMagnitude = (15 + index * 3) / scaleFactor
       const explodedOffset = direction.multiplyScalar(explosionMagnitude)
 
       // Stagger animation timing - spread across full scroll
@@ -129,8 +130,17 @@ export function RobotArmAssembly() {
 
     const offset = scroll.offset
 
-    // Global rotation based on scroll
-    groupRef.current.rotation.y = offset * Math.PI * 0.6
+    // ZOOM EFFECT: Start small and far, zoom in as we scroll
+    const zoomProgress = easeInOutCubic(Math.min(offset * 1.5, 1))
+    const targetScale = 0.4 + zoomProgress * 0.6 // Scale from 0.4 to 1.0
+    scaleRef.current += (targetScale - scaleRef.current) * 0.1
+    groupRef.current.scale.setScalar(scaleRef.current)
+
+    // Dramatic rotation - full rotation as parts assemble
+    groupRef.current.rotation.y = offset * Math.PI * 2
+
+    // Tilt that settles as assembly completes
+    groupRef.current.rotation.x = (1 - offset) * 0.3
 
     // Animate each part - REVERSE: start exploded, assemble as we scroll
     partsDataRef.current.forEach((part) => {

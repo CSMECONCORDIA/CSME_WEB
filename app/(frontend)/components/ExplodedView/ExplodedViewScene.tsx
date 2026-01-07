@@ -143,7 +143,7 @@ export function ExplodedViewScene() {
     <div ref={containerRef} className="h-screen w-full relative">
       <Canvas
         key="main-canvas"
-        camera={{ position: [0, 0, 8], fov: 50 }}
+        camera={{ position: [0, 0, 12], fov: 45 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true }}
         style={{
