@@ -1,0 +1,7 @@
+export { Gear } from './Gear'
+export { Shaft } from './Shaft'
+export { Bearing } from './Bearing'
+export { Housing } from './Housing'
+export { Plate } from './Plate'
+export { assemblyParts, contentSections, COLORS } from './config'
+export type { AssemblyPartConfig, ContentSectionConfig, PartGeometry } from './config'

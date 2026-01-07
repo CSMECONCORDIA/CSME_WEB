@@ -1,7 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import {
-  HomeHero,
+  ExplodedViewScene,
   ProjectCard,
   EventCard,
   AnimatedSectionHeader,
@@ -39,8 +39,8 @@ export default async function HomePage() {
 
   return (
     <div className="relative">
-      {/* Hero Section */}
-      <HomeHero />
+      {/* Exploded View Hero Section */}
+      <ExplodedViewScene />
 
       {/* Featured Event Section */}
       {featuredEvent && (
