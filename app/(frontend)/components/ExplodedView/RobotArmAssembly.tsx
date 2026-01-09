@@ -106,9 +106,9 @@ export function RobotArmAssembly() {
         direction.normalize()
       }
 
-      // Calculate explosion offset - DRAMATIC: parts start way offscreen
+      // Calculate explosion offset - parts start completely offscreen
       // Since we scale the model down, offsets need to be in model's original coordinate space
-      const explosionMagnitude = (15 + index * 3) / scaleFactor
+      const explosionMagnitude = (30 + index * 5) / scaleFactor
       const explodedOffset = direction.multiplyScalar(explosionMagnitude)
 
       // Store magnitude temporarily
@@ -130,8 +130,9 @@ export function RobotArmAssembly() {
     parts.forEach(part => {
       // Normalize: 0 = closest, 1 = furthest
       const normalized = (part.completionPoint - minMag) / magRange
-      // Map to completion range: closest completes at 0.3, furthest at 1.0
-      part.completionPoint = 0.3 + normalized * 0.7
+      // Map to completion range: closest completes at 0.15, furthest at 1.0
+      // Wide range = more staggered, one-by-one arrivals
+      part.completionPoint = 0.15 + normalized * 0.85
     })
 
     partsDataRef.current = parts
