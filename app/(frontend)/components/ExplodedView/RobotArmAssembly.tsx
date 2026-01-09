@@ -9,11 +9,16 @@ interface PartData {
   object: THREE.Object3D
   originalPosition: THREE.Vector3
   explodedOffset: THREE.Vector3
-  scrollStart: number
-  scrollEnd: number
+  // When this part completes (0-1), all parts start at 0
+  completionPoint: number
 }
 
-// Easing function for smooth animation
+// Easing function - ease out for immediate visual response
+function easeOutCubic(t: number): number {
+  return 1 - Math.pow(1 - t, 3)
+}
+
+// Easing for zoom/rotation
 function easeInOutCubic(t: number): number {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
 }
@@ -106,20 +111,27 @@ export function RobotArmAssembly() {
       const explosionMagnitude = (15 + index * 3) / scaleFactor
       const explodedOffset = direction.multiplyScalar(explosionMagnitude)
 
-      // Stagger animation timing - spread across full scroll
-      // Parts assemble in reverse order (last part first, first part last)
-      const totalParts = objectsToExplode.length
-      const reverseIndex = totalParts - 1 - index
-      const scrollStart = (reverseIndex / totalParts) * 0.7
-      const scrollEnd = scrollStart + 0.3
-
+      // Store magnitude temporarily
       parts.push({
         object: obj,
         originalPosition: originalPos,
         explodedOffset,
-        scrollStart,
-        scrollEnd,
+        completionPoint: explosionMagnitude, // Will be normalized below
       })
+    })
+
+    // Now normalize completion points based on distance
+    // Closer parts (smaller magnitude) complete first, further parts complete later
+    const magnitudes = parts.map(p => p.completionPoint)
+    const minMag = Math.min(...magnitudes)
+    const maxMag = Math.max(...magnitudes)
+    const magRange = maxMag - minMag || 1
+
+    parts.forEach(part => {
+      // Normalize: 0 = closest, 1 = furthest
+      const normalized = (part.completionPoint - minMag) / magRange
+      // Map to completion range: closest completes at 0.3, furthest at 1.0
+      part.completionPoint = 0.3 + normalized * 0.7
     })
 
     partsDataRef.current = parts
@@ -142,25 +154,19 @@ export function RobotArmAssembly() {
     // Tilt that settles as assembly completes
     groupRef.current.rotation.x = (1 - offset) * 0.3
 
-    // Animate each part - REVERSE: start exploded, assemble as we scroll
+    // Animate each part - all start at scroll 0, complete at staggered times
     partsDataRef.current.forEach((part) => {
-      const { object, originalPosition, explodedOffset, scrollStart, scrollEnd } = part
+      const { object, originalPosition, explodedOffset, completionPoint } = part
 
-      // Calculate progress for this part
-      let progress = 0
-      if (offset >= scrollStart && offset <= scrollEnd) {
-        progress = (offset - scrollStart) / (scrollEnd - scrollStart)
-      } else if (offset > scrollEnd) {
-        progress = 1
-      }
+      // Progress from 0 to 1 based on scroll position and this part's completion point
+      const progress = Math.min(offset / completionPoint, 1)
 
-      // Apply easing
-      const easedProgress = easeInOutCubic(progress)
+      // Apply easing - ease out for immediate visual response
+      const easedProgress = easeOutCubic(progress)
 
-      // REVERSE: 1 - progress means we start exploded and assemble over time
+      // assembleProgress: 1 = exploded, 0 = assembled
       const assembleProgress = 1 - easedProgress
 
-      // Set position: original + (offset * assembleProgress)
       object.position.set(
         originalPosition.x + explodedOffset.x * assembleProgress,
         originalPosition.y + explodedOffset.y * assembleProgress,
