@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { GearDecoration } from './GearDecoration'
+import footerLogoLight from '../../../media/55.png'
+import footerLogoDark from '../../../media/CSME.png'
 
 const footerLinks = {
   navigation: [
@@ -49,12 +51,12 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative bg-slate-900 text-white overflow-hidden">
+    <footer className="relative bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-white overflow-hidden">
       {/* Decorative Gears */}
-      <div className="absolute -right-20 -top-20 text-white/5">
+      <div className="absolute -right-20 -top-20 text-slate-200/70 dark:text-white/5">
         <GearDecoration size={300} spin />
       </div>
-      <div className="absolute -left-10 bottom-10 text-white/5">
+      <div className="absolute -left-10 bottom-10 text-slate-200/70 dark:text-white/5">
         <GearDecoration size={150} spin reverse />
       </div>
 
@@ -62,15 +64,21 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="relative w-[200px] h-[60px] mb-6 bg-white rounded p-2">
+            <div className="relative w-[200px] h-[60px] mb-6 rounded p-2 bg-white dark:bg-slate-800">
               <Image
-                src="/cropped-CSME-small-logo-acronym-text-2-1024x517.jpg"
+                src={footerLogoLight}
                 alt="CSME Concordia University"
                 fill
-                className="object-contain"
+                className="object-contain theme-logo-light"
+              />
+              <Image
+                src={footerLogoDark}
+                alt="CSME Concordia University"
+                fill
+                className="object-contain theme-logo-dark"
               />
             </div>
-            <p className="text-slate-400 mb-6 max-w-md leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 mb-6 max-w-md leading-relaxed">
               The Canadian Society for Mechanical Engineering at Concordia University.
               Connecting students, fostering innovation, and building the next generation
               of mechanical engineers.
@@ -82,7 +90,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center bg-white/10 text-white hover:bg-navy hover:text-white transition-all duration-300"
+                  className="w-10 h-10 flex items-center justify-center bg-slate-900/5 text-slate-600 hover:bg-navy hover:text-white dark:bg-white/10 dark:text-white transition-all duration-300"
                   aria-label={social.label}
                 >
                   {social.icon}
@@ -94,7 +102,7 @@ export function Footer() {
           {/* Navigation */}
           <div>
             <h4
-              className="text-sm font-bold uppercase tracking-wider mb-6 text-white"
+              className="text-sm font-bold uppercase tracking-wider mb-6 text-slate-900 dark:text-white"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Navigation
@@ -104,7 +112,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+                    className="text-slate-600 hover:text-navy dark:text-slate-400 dark:hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                   >
                     <span className="w-0 h-px bg-navy group-hover:w-3 transition-all duration-300" />
                     {link.label}
@@ -117,7 +125,7 @@ export function Footer() {
           {/* Resources */}
           <div>
             <h4
-              className="text-sm font-bold uppercase tracking-wider mb-6 text-white"
+              className="text-sm font-bold uppercase tracking-wider mb-6 text-slate-900 dark:text-white"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Resources
@@ -130,7 +138,7 @@ export function Footer() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+                      className="text-slate-600 hover:text-navy dark:text-slate-400 dark:hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                     >
                       <span className="w-0 h-px bg-navy group-hover:w-3 transition-all duration-300" />
                       {link.label}
@@ -141,7 +149,7 @@ export function Footer() {
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-slate-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+                      className="text-slate-600 hover:text-navy dark:text-slate-400 dark:hover:text-white transition-colors duration-300 flex items-center gap-2 group"
                     >
                       <span className="w-0 h-px bg-navy group-hover:w-3 transition-all duration-300" />
                       {link.label}
@@ -154,12 +162,12 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-white/10">
+        <div className="mt-16 pt-8 border-t border-slate-200 dark:border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-slate-500 text-sm">
+            <p className="text-slate-500 dark:text-slate-500 text-sm">
               &copy; {new Date().getFullYear()} CSME Concordia University. All rights reserved.
             </p>
-            <p className="text-slate-500 text-sm flex items-center gap-2">
+            <p className="text-slate-500 dark:text-slate-500 text-sm flex items-center gap-2">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
               Building the future of engineering
             </p>
