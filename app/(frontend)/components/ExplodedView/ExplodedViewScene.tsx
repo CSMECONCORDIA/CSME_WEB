@@ -54,7 +54,7 @@ function HtmlContent({ section, index, isLast }: {
       className={`absolute ${alignmentClasses[section.alignment]} ${contentMaxWidth} px-4`}
       style={{ top: `${section.scrollPosition * 100}vh` }}
     >
-      <div className="py-20 backdrop-blur-sm bg-white/30 rounded-2xl p-6">
+      <div className="py-20 backdrop-blur-sm bg-white/70 rounded-2xl p-6 shadow-lg shadow-slate-900/10">
         {section.subtitle && (
           <span className="inline-block text-[#1e4b7a] font-medium uppercase tracking-wider text-sm mb-3">
             {section.subtitle}
