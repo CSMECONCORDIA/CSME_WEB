@@ -1,4 +1,3 @@
-import type { JSX } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -269,8 +268,15 @@ export default async function EventPage({ params }: Props) {
                 }
                 if (node.type === 'heading') {
                   const text = (node.children as LexicalTextNode[])?.map((child) => child.text || '').join('') || ''
-                  const Tag = `h${node.tag || 3}` as keyof JSX.IntrinsicElements
-                  return <Tag key={index} className="text-slate-900 font-bold mt-8 mb-4">{text}</Tag>
+                  const headingClass = "text-slate-900 font-bold mt-8 mb-4"
+                  switch (node.tag) {
+                    case 1: return <h1 key={index} className={headingClass}>{text}</h1>
+                    case 2: return <h2 key={index} className={headingClass}>{text}</h2>
+                    case 4: return <h4 key={index} className={headingClass}>{text}</h4>
+                    case 5: return <h5 key={index} className={headingClass}>{text}</h5>
+                    case 6: return <h6 key={index} className={headingClass}>{text}</h6>
+                    default: return <h3 key={index} className={headingClass}>{text}</h3>
+                  }
                 }
                 if (node.type === 'list') {
                   const ListTag = node.listType === 'number' ? 'ol' : 'ul'
