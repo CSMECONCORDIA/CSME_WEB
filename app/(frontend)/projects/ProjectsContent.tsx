@@ -92,7 +92,7 @@ export function ProjectsEmptyState() {
           No Projects Yet
         </h3>
         <p className="text-slate-500 max-w-md mx-auto mb-8">
-          We're working on exciting new projects. Check back soon or contact us
+          We&apos;re working on exciting new projects. Check back soon or contact us
           to learn about upcoming opportunities!
         </p>
         <a href="/contact" className="btn-primary">
@@ -125,8 +125,8 @@ export function ProjectsCTA() {
         </FadeIn>
         <FadeIn delay={0.1}>
           <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
-            We're always looking for new projects and ideas. If you have a concept
-            you'd like to explore, we'd love to hear from you.
+            We&apos;re always looking for new projects and ideas. If you have a concept
+            you&apos;d like to explore, we&apos;d love to hear from you.
           </p>
         </FadeIn>
         <FadeIn delay={0.2}>

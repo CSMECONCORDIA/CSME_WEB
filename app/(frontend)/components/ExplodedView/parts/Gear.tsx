@@ -38,8 +38,6 @@ function createGearShape(innerRadius: number, outerRadius: number, teeth: number
     const tipRightAngle = angle + toothWidth * 0.7
     // Tooth base right
     const baseRightAngle = angle + toothWidth
-    // Valley
-    const valleyAngle = angle + toothWidth * 1.5
     // Next tooth start
     const nextBaseAngle = angle + (2 * Math.PI) / teeth
 

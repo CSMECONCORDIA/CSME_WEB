@@ -103,14 +103,14 @@ export function ContactHero() {
               className="text-5xl lg:text-6xl font-bold text-slate-900 mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              Let's
+              Let&apos;s
               <span className="text-navy"> Connect</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="text-xl text-slate-600 leading-relaxed">
               Have a question, want to join our team, or interested in collaborating?
-              We'd love to hear from you. Reach out and let's build something great together.
+              We&apos;d love to hear from you. Reach out and let&apos;s build something great together.
             </p>
           </FadeIn>
         </div>

@@ -226,7 +226,7 @@ export function HistorySection() {
               </p>
               <p>
                 We take pride in our diverse community that welcomes students from
-                all backgrounds and experience levels. Whether you're a first-year
+                all backgrounds and experience levels. Whether you&apos;re a first-year
                 student exploring your interests or a senior looking to refine your
                 skills, CSME has something to offer you.
               </p>
