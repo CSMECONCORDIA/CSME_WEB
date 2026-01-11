@@ -1,0 +1,6 @@
+# Cloudflare Pages configuration
+# This file provides additional configuration for Cloudflare deployments
+
+name = "csme-web"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]

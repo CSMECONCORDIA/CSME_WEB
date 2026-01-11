@@ -1,8 +1,9 @@
 'use client'
 
-import { Suspense, useEffect, useState, useRef } from 'react'
+import { Suspense, useState, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { ScrollControls, Scroll, Environment } from '@react-three/drei'
+import Link from 'next/link'
 import { RobotArmAssembly } from './RobotArmAssembly'
 import { contentSections } from './parts'
 
@@ -36,9 +37,8 @@ function Scene() {
 }
 
 // HTML Content section component
-function HtmlContent({ section, index, isLast }: {
+function HtmlContent({ section, isLast }: {
   section: typeof contentSections[0]
-  index: number
   isLast: boolean
 }) {
   const alignmentClasses = {
@@ -69,7 +69,7 @@ function HtmlContent({ section, index, isLast }: {
 
         {isLast && (
           <div className={`flex flex-wrap gap-4 mt-8 ${section.alignment === 'center' ? 'justify-center' : ''}`}>
-            <a
+            <Link
               href="/about"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white bg-[#1e4b7a] hover:bg-[#153658] transition-all duration-300"
             >
@@ -77,13 +77,13 @@ function HtmlContent({ section, index, isLast }: {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/projects"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-[#1e4b7a] border-2 border-[#1e4b7a] hover:bg-[#1e4b7a] hover:text-white transition-all duration-300"
             >
               View Projects
-            </a>
+            </Link>
           </div>
         )}
       </div>
@@ -113,7 +113,6 @@ function CanvasContent() {
             <HtmlContent
               key={section.id}
               section={section}
-              index={index}
               isLast={index === contentSections.length - 1}
             />
           ))}
@@ -124,12 +123,8 @@ function CanvasContent() {
 }
 
 export function ExplodedViewScene() {
-  const [mounted, setMounted] = useState(false)
+  const [mounted] = useState(() => typeof window !== 'undefined')
   const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   if (!mounted) {
     return (

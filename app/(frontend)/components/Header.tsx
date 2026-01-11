@@ -17,17 +17,18 @@ const navLinks = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window === 'undefined') return false
+    const stored = localStorage.getItem('theme')
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    return stored ? stored === 'dark' : prefersDark
+  })
   const pathname = usePathname()
 
   useEffect(() => {
-    const stored = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const shouldUseDark = stored ? stored === 'dark' : prefersDark
-    setIsDarkMode(shouldUseDark)
-    document.documentElement.classList.toggle('dark', shouldUseDark)
-    document.documentElement.style.colorScheme = shouldUseDark ? 'dark' : 'light'
-  }, [])
+    document.documentElement.classList.toggle('dark', isDarkMode)
+    document.documentElement.style.colorScheme = isDarkMode ? 'dark' : 'light'
+  }, [isDarkMode])
 
   const toggleTheme = () => {
     const next = !isDarkMode

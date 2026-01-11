@@ -94,7 +94,7 @@ export function UpcomingEventsSection({ children, isEmpty }: { children?: ReactN
                 No Upcoming Events
               </h3>
               <p className="text-slate-500 max-w-md mx-auto">
-                We're planning exciting new events. Follow us on social media or
+                We&apos;re planning exciting new events. Follow us on social media or
                 subscribe to stay updated!
               </p>
             </div>
@@ -188,7 +188,7 @@ export function EventsCTA() {
             className="text-4xl lg:text-5xl font-bold text-white mb-6"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            Don't Miss Out
+            Don&apos;t Miss Out
           </h2>
         </FadeIn>
         <FadeIn delay={0.1}>

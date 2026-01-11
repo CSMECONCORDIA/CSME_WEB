@@ -6,6 +6,20 @@ import config from '@/payload.config'
 import { GearDecoration } from '../../components'
 import type { Media } from '@/payload-types'
 
+// Lexical rich text types
+interface LexicalTextNode {
+  text?: string
+  type?: string
+  children?: LexicalTextNode[]
+}
+
+interface LexicalNode {
+  type: string
+  tag?: number
+  listType?: string
+  children?: LexicalNode[] | LexicalTextNode[]
+}
+
 type Props = {
   params: Promise<{ slug: string }>
 }
@@ -226,13 +240,13 @@ export default async function ProjectPage({ params }: Props) {
             </h2>
             <div className="prose prose-lg text-slate-600 leading-relaxed">
               {/* Render rich text description */}
-              {typeof project.description === 'object' && project.description.root?.children?.map((node: any, index: number) => {
+              {typeof project.description === 'object' && project.description.root?.children?.map((node: LexicalNode, index: number) => {
                 if (node.type === 'paragraph') {
-                  const text = node.children?.map((child: any) => child.text || '').join('') || ''
+                  const text = (node.children as LexicalTextNode[])?.map((child) => child.text || '').join('') || ''
                   return text ? <p key={index}>{text}</p> : null
                 }
                 if (node.type === 'heading') {
-                  const text = node.children?.map((child: any) => child.text || '').join('') || ''
+                  const text = (node.children as LexicalTextNode[])?.map((child) => child.text || '').join('') || ''
                   const Tag = `h${node.tag || 3}` as keyof JSX.IntrinsicElements
                   return <Tag key={index} className="text-slate-900 font-bold mt-8 mb-4">{text}</Tag>
                 }
@@ -240,9 +254,9 @@ export default async function ProjectPage({ params }: Props) {
                   const ListTag = node.listType === 'number' ? 'ol' : 'ul'
                   return (
                     <ListTag key={index} className="list-disc list-inside space-y-2">
-                      {node.children?.map((item: any, itemIndex: number) => {
-                        const text = item.children?.map((child: any) =>
-                          child.children?.map((c: any) => c.text || '').join('') || child.text || ''
+                      {(node.children as LexicalNode[])?.map((item, itemIndex: number) => {
+                        const text = (item.children as LexicalTextNode[])?.map((child) =>
+                          child.children?.map((c) => c.text || '').join('') || child.text || ''
                         ).join('') || ''
                         return <li key={itemIndex}>{text}</li>
                       })}
@@ -332,7 +346,7 @@ export default async function ProjectPage({ params }: Props) {
             Want to Join This Project?
           </h2>
           <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
-            We're always looking for passionate students to join our project teams.
+            We&apos;re always looking for passionate students to join our project teams.
             Get hands-on experience and make a real impact.
           </p>
           <Link href="/contact" className="btn-accent">

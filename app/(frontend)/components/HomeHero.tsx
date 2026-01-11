@@ -28,7 +28,7 @@ export function HomeHero() {
               </div>
               <h1 className="hero-title text-slate-900 mb-6">
                 Engineering
-                <span className="block text-navy">Tomorrow's</span>
+                <span className="block text-navy">Tomorrow&apos;s</span>
                 Solutions
               </h1>
               <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">

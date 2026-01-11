@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 interface ContentSectionProps {
   scrollPosition: number // Position in pages (0-5)
@@ -58,7 +59,7 @@ export function ContentSection({
 
         {showCTA && (
           <div className="flex flex-wrap gap-4 justify-center mt-8">
-            <a
+            <Link
               href="/about"
               className="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white bg-navy hover:bg-navy-dark transition-all duration-300"
             >
@@ -76,13 +77,13 @@ export function ContentSection({
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/projects"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-navy dark:text-white border-2 border-navy dark:border-white hover:bg-navy hover:text-white dark:hover:bg-white dark:hover:text-navy transition-all duration-300"
             >
               View Projects
-            </a>
+            </Link>
           </div>
         )}
       </motion.div>
