@@ -6,6 +6,8 @@ import config from '@/payload.config'
 import { GearDecoration } from '../../components'
 import type { Media } from '@/payload-types'
 
+export const runtime = 'edge'
+
 // Lexical rich text types
 interface LexicalTextNode {
   text?: string
