@@ -1,5 +1,6 @@
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import path from "path";
 import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
@@ -31,5 +32,14 @@ export default buildConfig({
       authToken: process.env.TURSO_AUTH_TOKEN,
     },
   }),
-  plugins: [],
+  plugins: [
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || "",
+      clientUploads: true, // Required for files > 4.5MB on Vercel
+    }),
+  ],
 });
