@@ -88,7 +88,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   fallbackLocale: null;
   globals: {};
@@ -125,7 +125,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -149,7 +149,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -168,14 +168,14 @@ export interface Media {
  * via the `definition` "projects".
  */
 export interface Project {
-  id: string;
+  id: number;
   title: string;
   slug: string;
   description?: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -186,13 +186,15 @@ export interface Project {
     };
     [k: string]: unknown;
   } | null;
-  thumbnail?: (string | null) | Media;
+  thumbnail?: (number | null) | Media;
   status?: ('upcoming' | 'ongoing' | 'completed') | null;
-  teamMembers?: {
-    name: string;
-    role?: string | null;
-    id?: string | null;
-  }[] | null;
+  teamMembers?:
+    | {
+        name: string;
+        role?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   startDate?: string | null;
   endDate?: string | null;
   featured?: boolean | null;
@@ -204,14 +206,14 @@ export interface Project {
  * via the `definition` "events".
  */
 export interface Event {
-  id: string;
+  id: number;
   title: string;
   slug: string;
   description?: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -222,10 +224,16 @@ export interface Event {
     };
     [k: string]: unknown;
   } | null;
-  thumbnail?: (string | null) | Media;
+  thumbnail?: (number | null) | Media;
   date: string;
+  /**
+   * Optional: for multi-day events
+   */
   endDate?: string | null;
   location?: string | null;
+  /**
+   * External registration URL
+   */
   registrationLink?: string | null;
   featured?: boolean | null;
   updatedAt: string;
@@ -236,7 +244,7 @@ export interface Event {
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
+  id: number;
   key: string;
   data:
     | {
@@ -253,20 +261,28 @@ export interface PayloadKv {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -276,10 +292,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -299,7 +315,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -355,11 +371,13 @@ export interface ProjectsSelect<T extends boolean = true> {
   description?: T;
   thumbnail?: T;
   status?: T;
-  teamMembers?: T | {
-    name?: T;
-    role?: T;
-    id?: T;
-  };
+  teamMembers?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        id?: T;
+      };
   startDate?: T;
   endDate?: T;
   featured?: T;
