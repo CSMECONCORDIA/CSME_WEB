@@ -8,7 +8,8 @@
     "build": "next build",
     "build:opennext": "opennextjs-cloudflare build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "^3.70.0",
