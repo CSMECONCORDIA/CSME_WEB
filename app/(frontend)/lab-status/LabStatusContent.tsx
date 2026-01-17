@@ -183,7 +183,7 @@ export function LabStatusContent() {
       }
 
       setError(null)
-    } catch (err) {
+    } catch {
       setError('Failed to fetch status. Please try again later.')
     } finally {
       setLoading(false)

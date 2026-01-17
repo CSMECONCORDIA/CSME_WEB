@@ -74,13 +74,10 @@ async function verifyDiscordRequest(request: NextRequest, body: string): Promise
   }
 }
 
-// In-memory lab status (shared with lab-status route via module scope)
-// In production, use a database or KV store
-let labStatus = {
-  isOpen: false,
-  lastUpdated: new Date().toISOString(),
-  message: 'Lab status not yet set.',
-  updatedBy: 'System',
+// Type for Discord command options
+interface CommandOption {
+  name: string
+  value: string
 }
 
 export async function POST(request: NextRequest) {
@@ -106,17 +103,9 @@ export async function POST(request: NextRequest) {
 
     switch (name) {
       case 'lab-open': {
-        const message = options?.find((o: any) => o.name === 'message')?.value || 'The lab is open! Come visit us.'
+        const message = (options as CommandOption[] | undefined)?.find((o) => o.name === 'message')?.value || 'The lab is open! Come visit us.'
 
-        // Update lab status
-        labStatus = {
-          isOpen: true,
-          lastUpdated: new Date().toISOString(),
-          message,
-          updatedBy: user.username,
-        }
-
-        // Also update via internal API call to ensure consistency
+        // Update lab status via API
         try {
           const baseUrl = process.env.VERCEL_URL
             ? `https://${process.env.VERCEL_URL}`
@@ -147,14 +136,7 @@ export async function POST(request: NextRequest) {
       }
 
       case 'lab-close': {
-        const message = options?.find((o: any) => o.name === 'message')?.value || 'The lab is currently closed.'
-
-        labStatus = {
-          isOpen: false,
-          lastUpdated: new Date().toISOString(),
-          message,
-          updatedBy: user.username,
-        }
+        const message = (options as CommandOption[] | undefined)?.find((o) => o.name === 'message')?.value || 'The lab is currently closed.'
 
         try {
           const baseUrl = process.env.VERCEL_URL
@@ -203,7 +185,7 @@ export async function POST(request: NextRequest) {
               content: `${statusEmoji} **Lab Status: ${statusText}**\n📝 ${status.message || 'No message'}\n🕒 Last updated: ${new Date(status.lastUpdated).toLocaleString()}`,
             },
           })
-        } catch (error) {
+        } catch {
           return NextResponse.json({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             data: {
