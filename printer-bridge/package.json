@@ -1,0 +1,16 @@
+{
+  "name": "csme-printer-bridge",
+  "version": "1.0.0",
+  "description": "Bridge service to push Creality K1C printer status to CSME website",
+  "main": "bridge.js",
+  "scripts": {
+    "start": "node bridge.js",
+    "dev": "node --watch bridge.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
