@@ -7,29 +7,29 @@ import { GearDecoration } from '../components/GearDecoration'
 
 export function EventsHero() {
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-slate-50">
-      <div className="absolute top-0 right-0 text-navy/5">
+    <section className="relative py-24 lg:py-32 overflow-hidden bg-slate-50 dark:bg-slate-900">
+      <div className="absolute top-0 right-0 text-navy/5 dark:text-white/5">
         <GearDecoration size={600} spin />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl">
           <FadeIn>
-            <span className="text-navy font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
+            <span className="text-navy dark:text-navy-light font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
               Events
             </span>
           </FadeIn>
           <FadeIn delay={0.1}>
             <h1
-              className="text-5xl lg:text-6xl font-bold text-slate-900 mb-6"
+              className="text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Connect &
-              <span className="text-navy"> Grow</span>
+              <span className="text-navy dark:text-navy-light"> Grow</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <p className="text-xl text-slate-600 leading-relaxed">
+            <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
               From technical workshops to industry networking nights, our events
               provide opportunities to learn, connect, and advance your career
               in mechanical engineering.
@@ -76,7 +76,7 @@ export function UpcomingEventsSection({ children, isEmpty }: { children?: ReactN
           <div className="flex items-center gap-4 mb-12">
             <div className="w-3 h-3 bg-accent rounded-full animate-pulse" />
             <h2
-              className="text-3xl font-bold text-slate-900"
+              className="text-3xl font-bold text-slate-900 dark:text-white"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Upcoming Events
@@ -86,14 +86,14 @@ export function UpcomingEventsSection({ children, isEmpty }: { children?: ReactN
 
         {isEmpty ? (
           <FadeIn delay={0.1}>
-            <div className="text-center py-16 bg-slate-50 border-2 border-dashed border-slate-200">
-              <svg className="w-16 h-16 mx-auto text-slate-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="text-center py-16 bg-slate-50 dark:bg-slate-800/50 border-2 border-dashed border-slate-200 dark:border-slate-700">
+              <svg className="w-16 h-16 mx-auto text-slate-300 dark:text-slate-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <h3 className="text-xl font-bold text-slate-900 mb-2" style={{ fontFamily: 'var(--font-display)' }}>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2" style={{ fontFamily: 'var(--font-display)' }}>
                 No Upcoming Events
               </h3>
-              <p className="text-slate-500 max-w-md mx-auto">
+              <p className="text-slate-500 dark:text-slate-400 max-w-md mx-auto">
                 We&apos;re planning exciting new events. Follow us on social media or
                 subscribe to stay updated!
               </p>
@@ -122,13 +122,13 @@ interface PastEvent {
 
 export function PastEventsSection({ events }: { events: PastEvent[] }) {
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <div className="flex items-center gap-4 mb-12">
-            <div className="w-3 h-3 bg-slate-400 rounded-full" />
+            <div className="w-3 h-3 bg-slate-400 dark:bg-slate-600 rounded-full" />
             <h2
-              className="text-3xl font-bold text-slate-900"
+              className="text-3xl font-bold text-slate-900 dark:text-white"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Past Events
@@ -139,9 +139,9 @@ export function PastEventsSection({ events }: { events: PastEvent[] }) {
         <StaggerContainer className="grid md:grid-cols-2 gap-6" staggerDelay={0.05}>
           {events.map((event) => (
             <StaggerItem key={event.id}>
-              <div className="bg-white p-6 border border-slate-200 opacity-80 hover:opacity-100 transition-opacity">
+              <div className="bg-white dark:bg-slate-800 p-6 border border-slate-200 dark:border-slate-700 opacity-80 hover:opacity-100 transition-opacity">
                 <div className="flex items-start gap-4">
-                  <div className="w-16 flex-shrink-0 bg-slate-100 text-slate-600 flex flex-col items-center justify-center p-3">
+                  <div className="w-16 flex-shrink-0 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 flex flex-col items-center justify-center p-3">
                     <span className="text-xl font-bold leading-none" style={{ fontFamily: 'var(--font-display)' }}>
                       {new Date(event.date).getDate()}
                     </span>
@@ -151,12 +151,12 @@ export function PastEventsSection({ events }: { events: PastEvent[] }) {
                   </div>
                   <div className="flex-1">
                     <h3
-                      className="text-lg font-bold text-slate-900 mb-1"
+                      className="text-lg font-bold text-slate-900 dark:text-white mb-1"
                       style={{ fontFamily: 'var(--font-display)' }}
                     >
                       {event.title}
                     </h3>
-                    <div className="flex flex-wrap gap-4 text-sm text-slate-500">
+                    <div className="flex flex-wrap gap-4 text-sm text-slate-500 dark:text-slate-400">
                       {event.location && (
                         <span className="flex items-center gap-1">
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

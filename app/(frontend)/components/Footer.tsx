@@ -80,7 +80,7 @@ export function Footer() {
               />
             </div>
             <p className="text-slate-600 dark:text-slate-400 mb-6 max-w-md leading-relaxed">
-              The Canadian Society for Mechanical Engineering at Concordia University.
+              The Canadian Society for Mechanical Engineering - Concordia Chapter.
               Connecting students, fostering innovation, and building the next generation
               of mechanical engineers.
             </p>

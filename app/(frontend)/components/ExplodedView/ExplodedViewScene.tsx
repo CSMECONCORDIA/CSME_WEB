@@ -44,14 +44,14 @@ function HtmlContent({ section, isLast }: {
   const alignmentClasses = {
     left: 'left-6 md:left-12 lg:left-20 text-left',
     right: 'right-6 md:right-12 lg:right-20 text-right',
-    center: 'left-1/2 -translate-x-1/2 text-center',
+    center: 'inset-x-4 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 text-center',
   }
 
-  const contentMaxWidth = section.alignment === 'center' ? 'max-w-2xl' : 'max-w-md'
+  const contentMaxWidth = section.alignment === 'center' ? 'md:max-w-2xl' : 'max-w-md'
 
   return (
     <div
-      className={`absolute ${alignmentClasses[section.alignment]} ${contentMaxWidth} px-4`}
+      className={`absolute ${alignmentClasses[section.alignment]} ${contentMaxWidth}`}
       style={{ top: `${section.scrollPosition * 100}vh` }}
     >
       <div className="py-20 backdrop-blur-sm bg-white/70 rounded-2xl p-6 shadow-lg shadow-slate-900/10">

@@ -46,33 +46,33 @@ const values = [
 
 export function AboutHero() {
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-slate-50">
-      <div className="absolute top-0 right-0 text-navy/5">
+    <section className="relative py-24 lg:py-32 overflow-hidden bg-slate-50 dark:bg-slate-900">
+      <div className="absolute top-0 right-0 text-navy/5 dark:text-white/5">
         <GearDecoration size={600} spin />
       </div>
-      <div className="absolute bottom-0 left-0 text-navy/5">
+      <div className="absolute bottom-0 left-0 text-navy/5 dark:text-white/5">
         <GearDecoration size={300} spin reverse />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl">
           <FadeIn>
-            <span className="text-navy font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
+            <span className="text-navy dark:text-navy-light font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
               About CSME
             </span>
           </FadeIn>
           <FadeIn delay={0.1}>
             <h1
-              className="text-5xl lg:text-6xl font-bold text-slate-900 mb-6"
+              className="text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Building the Future of
-              <span className="text-navy"> Mechanical Engineering</span>
+              <span className="text-navy dark:text-navy-light"> Mechanical Engineering</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <p className="text-xl text-slate-600 leading-relaxed">
-              The Canadian Society for Mechanical Engineering at Concordia University
+            <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+              The Canadian Society for Mechanical Engineering - Concordia Chapter
               is a student-run organization dedicated to fostering innovation,
               professional development, and community among aspiring mechanical engineers.
             </p>
@@ -90,16 +90,16 @@ export function MissionSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <FadeIn direction="left">
             <div>
-              <span className="text-navy font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
+              <span className="text-navy dark:text-navy-light font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
                 Our Mission
               </span>
               <h2
-                className="text-4xl font-bold text-slate-900 mb-6"
+                className="text-4xl font-bold text-slate-900 dark:text-white mb-6"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 Empowering the Next Generation of Engineers
               </h2>
-              <div className="space-y-4 text-slate-600 leading-relaxed">
+              <div className="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed">
                 <p>
                   CSME Concordia serves as a bridge between academic learning and
                   professional practice. We provide students with opportunities to
@@ -123,13 +123,13 @@ export function MissionSection() {
 
           <FadeIn direction="right" delay={0.2}>
             <div className="relative">
-              <div className="aspect-square bg-slate-100 relative overflow-hidden">
+              <div className="aspect-square bg-slate-100 dark:bg-slate-800 relative overflow-hidden">
                 {/* Technical frame */}
-                <div className="absolute inset-0 border-4 border-navy/10" />
-                <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-navy -translate-x-2 -translate-y-2" />
-                <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-navy translate-x-2 translate-y-2" />
+                <div className="absolute inset-0 border-4 border-navy/10 dark:border-white/10" />
+                <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-navy dark:border-navy-light -translate-x-2 -translate-y-2" />
+                <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-navy dark:border-navy-light translate-x-2 translate-y-2" />
 
-                <div className="absolute inset-8 bg-white shadow-xl flex items-center justify-center">
+                <div className="absolute inset-8 bg-white dark:bg-slate-700 shadow-xl flex items-center justify-center">
                   <Image
                     src="/12.png"
                     alt="CSME Concordia"
@@ -200,18 +200,18 @@ export function HistorySection() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
-            <span className="text-navy font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
+            <span className="text-navy dark:text-navy-light font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
               Our Story
             </span>
             <h2
-              className="text-4xl font-bold text-slate-900 mb-8"
+              className="text-4xl font-bold text-slate-900 dark:text-white mb-8"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               A Legacy of Engineering Excellence
             </h2>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <div className="space-y-6 text-slate-600 leading-relaxed text-left">
+            <div className="space-y-6 text-slate-600 dark:text-slate-300 leading-relaxed text-left">
               <p>
                 The CSME Concordia chapter was established to bring together
                 mechanical engineering students who share a passion for innovation

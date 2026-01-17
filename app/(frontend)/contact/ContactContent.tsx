@@ -76,7 +76,7 @@ const faqs = [
   },
   {
     q: 'Are there membership fees?',
-    a: 'We offer both free general membership and paid premium membership with additional benefits. Contact us for details on membership options.',
+    a: 'No! Membership is completely free for all Concordia students.',
   },
   {
     q: 'How can I get involved in projects?',
@@ -86,29 +86,29 @@ const faqs = [
 
 export function ContactHero() {
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-slate-50">
-      <div className="absolute top-0 right-0 text-navy/5">
+    <section className="relative py-24 lg:py-32 overflow-hidden bg-slate-50 dark:bg-slate-900">
+      <div className="absolute top-0 right-0 text-navy/5 dark:text-white/5">
         <GearDecoration size={600} spin />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl">
           <FadeIn>
-            <span className="text-navy font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
+            <span className="text-navy dark:text-navy-light font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
               Contact Us
             </span>
           </FadeIn>
           <FadeIn delay={0.1}>
             <h1
-              className="text-5xl lg:text-6xl font-bold text-slate-900 mb-6"
+              className="text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Let&apos;s
-              <span className="text-navy"> Connect</span>
+              <span className="text-navy dark:text-navy-light"> Connect</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <p className="text-xl text-slate-600 leading-relaxed">
+            <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
               Have a question, want to join our team, or interested in collaborating?
               We&apos;d love to hear from you. Reach out and let&apos;s build something great together.
             </p>
@@ -124,7 +124,7 @@ export function ContactFormSection({ children }: { children: ReactNode }) {
     <FadeIn direction="left">
       <div>
         <h2
-          className="text-3xl font-bold text-slate-900 mb-8"
+          className="text-3xl font-bold text-slate-900 dark:text-white mb-8"
           style={{ fontFamily: 'var(--font-display)' }}
         >
           Send Us a Message
@@ -140,7 +140,7 @@ export function ContactInfoSection() {
     <FadeIn direction="right" delay={0.2}>
       <div>
         <h2
-          className="text-3xl font-bold text-slate-900 mb-8"
+          className="text-3xl font-bold text-slate-900 dark:text-white mb-8"
           style={{ fontFamily: 'var(--font-display)' }}
         >
           Get in Touch
@@ -149,18 +149,18 @@ export function ContactInfoSection() {
         <StaggerContainer className="space-y-6 mb-12" staggerDelay={0.1}>
           {contactInfo.map((info) => (
             <StaggerItem key={info.title}>
-              <div className="flex items-start gap-4 p-6 bg-slate-50 border border-slate-200">
-                <div className="text-navy">
+              <div className="flex items-start gap-4 p-6 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                <div className="text-navy dark:text-navy-light">
                   {info.icon}
                 </div>
                 <div>
                   <h3
-                    className="font-bold text-slate-900 mb-1"
+                    className="font-bold text-slate-900 dark:text-white mb-1"
                     style={{ fontFamily: 'var(--font-display)' }}
                   >
                     {info.title}
                   </h3>
-                  <p className="text-slate-600">
+                  <p className="text-slate-600 dark:text-slate-300">
                     {info.value}
                   </p>
                 </div>
@@ -173,7 +173,7 @@ export function ContactInfoSection() {
         <FadeIn delay={0.4}>
           <div>
             <h3
-              className="text-xl font-bold text-slate-900 mb-6"
+              className="text-xl font-bold text-slate-900 dark:text-white mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Follow Us
@@ -220,15 +220,15 @@ export function ContactInfoSection() {
 
 export function FAQSection() {
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <div className="text-center mb-16">
-            <span className="text-navy font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
+            <span className="text-navy dark:text-navy-light font-medium uppercase tracking-wider text-sm mb-4 block" style={{ fontFamily: 'var(--font-display)' }}>
               FAQ
             </span>
             <h2
-              className="text-4xl font-bold text-slate-900"
+              className="text-4xl font-bold text-slate-900 dark:text-white"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Frequently Asked Questions
@@ -239,14 +239,14 @@ export function FAQSection() {
         <StaggerContainer className="space-y-4" staggerDelay={0.1}>
           {faqs.map((faq, index) => (
             <StaggerItem key={index}>
-              <div className="bg-white border border-slate-200 p-6">
+              <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6">
                 <h3
-                  className="text-lg font-bold text-slate-900 mb-2"
+                  className="text-lg font-bold text-slate-900 dark:text-white mb-2"
                   style={{ fontFamily: 'var(--font-display)' }}
                 >
                   {faq.q}
                 </h3>
-                <p className="text-slate-600">
+                <p className="text-slate-600 dark:text-slate-300">
                   {faq.a}
                 </p>
               </div>

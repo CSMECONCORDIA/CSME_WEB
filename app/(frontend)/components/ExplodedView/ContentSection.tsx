@@ -25,14 +25,14 @@ export function ContentSection({
   const alignmentClasses = {
     left: 'left-6 md:left-12 lg:left-20 text-left',
     right: 'right-6 md:right-12 lg:right-20 text-right',
-    center: 'left-1/2 -translate-x-1/2 text-center',
+    center: 'left-0 right-0 mx-auto text-center',
   }
 
-  const contentMaxWidth = alignment === 'center' ? 'max-w-2xl' : 'max-w-md'
+  const contentMaxWidth = alignment === 'center' ? 'max-w-2xl w-full' : 'max-w-md'
 
   return (
     <div
-      className={`absolute ${alignmentClasses[alignment]} ${contentMaxWidth} px-4`}
+      className={`absolute ${alignmentClasses[alignment]} ${contentMaxWidth} px-6`}
       style={{ top: topPosition }}
     >
       <motion.div

@@ -8,7 +8,7 @@ import {
 
 export const metadata = {
   title: 'About Us | CSME Concordia',
-  description: 'Learn about the Canadian Society for Mechanical Engineering at Concordia University - our mission, values, and team.',
+  description: 'Learn about the Canadian Society for Mechanical Engineering - Concordia Chapter. Our mission, values, and team.',
 }
 
 export default function AboutPage() {
