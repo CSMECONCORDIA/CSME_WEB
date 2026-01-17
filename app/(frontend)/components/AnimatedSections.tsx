@@ -25,13 +25,13 @@ export function AnimatedSectionHeader({
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
         <div>
           <span
-            className={`font-medium uppercase tracking-wider text-sm mb-2 block ${dark ? 'text-navy-light' : 'text-navy'}`}
+            className={`font-medium uppercase tracking-wider text-sm mb-2 block ${dark ? 'text-navy-light' : 'text-navy dark:text-navy-light'}`}
             style={{ fontFamily: 'var(--font-display)' }}
           >
             {subtitle}
           </span>
           <h2
-            className={`text-4xl lg:text-5xl font-bold ${dark ? 'text-white' : 'text-slate-900'}`}
+            className={`text-4xl lg:text-5xl font-bold ${dark ? 'text-white' : 'text-slate-900 dark:text-white'}`}
             style={{ fontFamily: 'var(--font-display)' }}
           >
             {title}
@@ -146,7 +146,7 @@ export function AnimatedFeaturedEvent({ children }: AnimatedFeaturedEventProps) 
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="bg-white">{children}</div>
+          <div>{children}</div>
         </FadeIn>
       </div>
     </section>

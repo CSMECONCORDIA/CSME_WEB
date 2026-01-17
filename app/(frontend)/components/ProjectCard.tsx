@@ -21,9 +21,9 @@ export function ProjectCard({ project }: { project: Project }) {
 
   return (
     <Link href={`/projects/${project.slug}`} className="block">
-      <article className="group card-hover bg-white border border-slate-200 overflow-hidden">
+      <article className="group card-hover bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden">
       {/* Image Container */}
-      <div className="relative h-48 bg-slate-100 overflow-hidden">
+      <div className="relative h-48 bg-slate-100 dark:bg-slate-700 overflow-hidden">
         {hasImage ? (
           <Image
             src={thumbnail.url!}
@@ -56,7 +56,7 @@ export function ProjectCard({ project }: { project: Project }) {
       {/* Content */}
       <div className="p-6">
         <h3
-          className="text-xl font-bold text-slate-900 mb-2 group-hover:text-navy transition-colors"
+          className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-navy dark:group-hover:text-navy-light transition-colors"
           style={{ fontFamily: 'var(--font-display)' }}
         >
           {project.title}
@@ -64,7 +64,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
         {/* Date Range */}
         {(project.startDate || project.endDate) && (
-          <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+          <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-3">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
@@ -78,7 +78,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
         {/* Team Members */}
         {project.teamMembers && project.teamMembers.length > 0 && (
-          <div className="flex items-center gap-2 text-sm text-slate-500 mb-4">
+          <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-4">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
@@ -87,12 +87,12 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
 
         {/* Arrow Link */}
-        <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-          <span className="text-sm text-navy font-medium uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>
+        <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
+          <span className="text-sm text-navy dark:text-navy-light font-medium uppercase tracking-wider" style={{ fontFamily: 'var(--font-display)' }}>
             Learn More
           </span>
           <svg
-            className="w-5 h-5 text-navy transform group-hover:translate-x-2 transition-transform"
+            className="w-5 h-5 text-navy dark:text-navy-light transform group-hover:translate-x-2 transition-transform"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

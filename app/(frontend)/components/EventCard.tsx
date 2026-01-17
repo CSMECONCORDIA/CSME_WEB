@@ -26,10 +26,10 @@ export function EventCard({ event, variant = 'default' }: { event: Event; varian
   if (variant === 'featured') {
     return (
       <Link href={`/events/${event.slug}`} className="block">
-        <article className="group card-hover bg-white border border-slate-200 overflow-hidden">
+        <article className="group card-hover bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden">
           <div className="grid md:grid-cols-2">
             {/* Image */}
-            <div className="relative h-64 md:h-auto bg-slate-100 overflow-hidden">
+            <div className="relative h-64 md:h-auto bg-slate-100 dark:bg-slate-700 overflow-hidden">
               {hasImage ? (
                 <Image
                   src={thumbnail.url!}
@@ -65,22 +65,22 @@ export function EventCard({ event, variant = 'default' }: { event: Event; varian
                 </span>
               )}
               <h3
-                className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-navy transition-colors"
+                className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-navy dark:group-hover:text-navy-light transition-colors"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 {event.title}
               </h3>
 
-              <div className="space-y-3 text-slate-600 mb-6">
+              <div className="space-y-3 text-slate-600 dark:text-slate-300 mb-6">
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-navy dark:text-navy-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span>{eventDate.full} at {eventDate.time}</span>
                 </div>
                 {event.location && (
                   <div className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-5 h-5 text-navy dark:text-navy-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -111,7 +111,7 @@ export function EventCard({ event, variant = 'default' }: { event: Event; varian
 
   return (
     <Link href={`/events/${event.slug}`} className="block">
-      <article className="group card-hover bg-white border border-slate-200 overflow-hidden flex">
+      <article className="group card-hover bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden flex">
         {/* Date Column */}
         <div className="w-24 flex-shrink-0 bg-navy text-white flex flex-col items-center justify-center p-4">
           <span className="text-3xl font-bold leading-none" style={{ fontFamily: 'var(--font-display)' }}>
@@ -134,12 +134,12 @@ export function EventCard({ event, variant = 'default' }: { event: Event; varian
             </span>
           )}
           <h3
-            className="text-lg font-bold text-slate-900 mb-2 group-hover:text-navy transition-colors"
+            className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-navy dark:group-hover:text-navy-light transition-colors"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             {event.title}
           </h3>
-          <div className="flex flex-wrap gap-4 text-sm text-slate-500">
+          <div className="flex flex-wrap gap-4 text-sm text-slate-500 dark:text-slate-400">
             <span className="flex items-center gap-1">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -160,7 +160,7 @@ export function EventCard({ event, variant = 'default' }: { event: Event; varian
         {/* Arrow */}
         <div className="flex-shrink-0 flex items-center pr-5">
           <svg
-            className="w-5 h-5 text-slate-400 group-hover:text-navy group-hover:translate-x-1 transition-all"
+            className="w-5 h-5 text-slate-400 dark:text-slate-500 group-hover:text-navy dark:group-hover:text-navy-light group-hover:translate-x-1 transition-all"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
