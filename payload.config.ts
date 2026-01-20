@@ -9,6 +9,7 @@ import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
 import { Events } from "./collections/Events";
+import { LabStatus } from "./globals/LabStatus";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -21,6 +22,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Projects, Events],
+  globals: [LabStatus],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

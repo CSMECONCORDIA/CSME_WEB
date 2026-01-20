@@ -1,7 +1,22 @@
 import type { CollectionConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
+  hooks: {
+    afterDelete: [
+      async () => {
+        revalidatePath('/projects')
+        revalidatePath('/', 'layout')
+      },
+    ],
+    afterChange: [
+      async () => {
+        revalidatePath('/projects')
+        revalidatePath('/', 'layout')
+      },
+    ],
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'status', 'featured', 'startDate'],
