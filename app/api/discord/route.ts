@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 /**
  * Discord Interactions Webhook Handler
@@ -105,26 +107,24 @@ export async function POST(request: NextRequest) {
       case 'lab-open': {
         const message = (options as CommandOption[] | undefined)?.find((o) => o.name === 'message')?.value || 'The lab is open! Come visit us.'
 
-        // Update lab status via API
         try {
-          const baseUrl = process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
-            : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-
-          await fetch(`${baseUrl}/api/lab-status`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${process.env.DISCORD_BOT_SECRET}`,
-            },
-            body: JSON.stringify({
+          const payload = await getPayload({ config })
+          await payload.updateGlobal({
+            slug: 'lab-status',
+            data: {
               isOpen: true,
               message,
               updatedBy: user.username,
-            }),
+            },
           })
         } catch (error) {
-          console.error('Failed to update lab status API:', error)
+          console.error('Failed to update lab status:', error)
+          return NextResponse.json({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+              content: `❌ Failed to update lab status. Please try again.`,
+            },
+          })
         }
 
         return NextResponse.json({
@@ -139,24 +139,23 @@ export async function POST(request: NextRequest) {
         const message = (options as CommandOption[] | undefined)?.find((o) => o.name === 'message')?.value || 'The lab is currently closed.'
 
         try {
-          const baseUrl = process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
-            : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-
-          await fetch(`${baseUrl}/api/lab-status`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${process.env.DISCORD_BOT_SECRET}`,
-            },
-            body: JSON.stringify({
+          const payload = await getPayload({ config })
+          await payload.updateGlobal({
+            slug: 'lab-status',
+            data: {
               isOpen: false,
               message,
               updatedBy: user.username,
-            }),
+            },
           })
         } catch (error) {
-          console.error('Failed to update lab status API:', error)
+          console.error('Failed to update lab status:', error)
+          return NextResponse.json({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+              content: `❌ Failed to update lab status. Please try again.`,
+            },
+          })
         }
 
         return NextResponse.json({
@@ -169,20 +168,19 @@ export async function POST(request: NextRequest) {
 
       case 'lab-status': {
         try {
-          const baseUrl = process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
-            : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-
-          const response = await fetch(`${baseUrl}/api/lab-status`)
-          const status = await response.json()
+          const payload = await getPayload({ config })
+          const status = await payload.findGlobal({
+            slug: 'lab-status',
+          })
 
           const statusEmoji = status.isOpen ? '✅' : '🔒'
           const statusText = status.isOpen ? 'OPEN' : 'CLOSED'
+          const lastUpdated = status.updatedAt ? new Date(status.updatedAt).toLocaleString() : 'Never'
 
           return NextResponse.json({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             data: {
-              content: `${statusEmoji} **Lab Status: ${statusText}**\n📝 ${status.message || 'No message'}\n🕒 Last updated: ${new Date(status.lastUpdated).toLocaleString()}`,
+              content: `${statusEmoji} **Lab Status: ${statusText}**\n📝 ${status.message || 'No message'}\n🕒 Last updated: ${lastUpdated}`,
             },
           })
         } catch {

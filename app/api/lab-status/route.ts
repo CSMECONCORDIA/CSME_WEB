@@ -13,20 +13,18 @@ export async function GET() {
     })
 
     return NextResponse.json({
-      isOpen: labStatus.isOpen,
-      lastUpdated: labStatus.updatedAt,
-      message: labStatus.message,
+      isOpen: labStatus.isOpen ?? false,
+      lastUpdated: labStatus.updatedAt || new Date().toISOString(),
+      message: labStatus.message || 'Lab status will be updated when a team member checks in.',
       updatedBy: labStatus.updatedBy,
     })
   } catch (error) {
     console.error('Error fetching lab status:', error)
-    return NextResponse.json(
-      {
-        isOpen: false,
-        lastUpdated: new Date().toISOString(),
-        message: 'Lab status will be updated when a team member checks in.',
-      }
-    )
+    return NextResponse.json({
+      isOpen: false,
+      lastUpdated: new Date().toISOString(),
+      message: 'Lab status will be updated when a team member checks in.',
+    })
   }
 }
 
