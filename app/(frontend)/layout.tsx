@@ -8,6 +8,10 @@ export const metadata = {
   title: 'CSME Concordia | Canadian Society for Mechanical Engineering',
   description: 'The Canadian Society for Mechanical Engineering - Concordia Chapter. Connecting students, fostering innovation, and building the next generation of mechanical engineers.',
   keywords: ['CSME', 'Concordia University', 'Mechanical Engineering', 'Student Club', 'Engineering Society'],
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
