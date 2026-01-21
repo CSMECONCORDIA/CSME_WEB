@@ -331,7 +331,7 @@ export function LabStatusContent() {
               Get real-time notifications when the lab opens, printer availability updates, and connect with other members.
             </p>
             <a
-              href="https://discord.gg/csme"
+              href="https://discord.com/invite/7nzgpd5qee"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-accent inline-flex"
