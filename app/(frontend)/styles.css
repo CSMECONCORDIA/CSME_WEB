@@ -116,6 +116,25 @@ body {
   animation: rotate-slow-reverse 25s linear infinite;
 }
 
+/* Lab status banner animations */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes bounce-x {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s linear infinite;
+}
+
+.animate-bounce-x {
+  animation: bounce-x 1s ease-in-out infinite;
+}
+
 /* Stagger animations */
 @keyframes fade-up {
   from {

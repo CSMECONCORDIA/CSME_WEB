@@ -1,4 +1,5 @@
 export { Header } from './Header'
+export { LabStatusBanner } from './LabStatusBanner'
 export { Footer } from './Footer'
 export { GearDecoration } from './GearDecoration'
 export { ProjectCard } from './ProjectCard'

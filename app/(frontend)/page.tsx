@@ -10,6 +10,7 @@ import {
   AnimatedCTASection,
   AnimatedFeaturedEvent,
   AnimatedEventsList,
+  LabStatusBanner,
 } from './components'
 
 export default async function HomePage() {
@@ -39,6 +40,9 @@ export default async function HomePage() {
 
   return (
     <div className="relative">
+      {/* Lab Status Banner */}
+      <LabStatusBanner />
+
       {/* Exploded View Hero Section */}
       <ExplodedViewScene />
 
