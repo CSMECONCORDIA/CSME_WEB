@@ -9,6 +9,9 @@ import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Projects } from "./collections/Projects";
 import { Events } from "./collections/Events";
+import { Customers } from "./collections/Customers";
+import { InventoryItems } from "./collections/InventoryItems";
+import { Checkouts } from "./collections/Checkouts";
 import { LabStatus } from "./globals/LabStatus";
 
 const filename = fileURLToPath(import.meta.url);
@@ -21,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Projects, Events],
+  collections: [Users, Media, Projects, Events, Customers, InventoryItems, Checkouts],
   globals: [LabStatus],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
