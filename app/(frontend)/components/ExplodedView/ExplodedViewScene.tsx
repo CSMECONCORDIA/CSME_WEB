@@ -290,7 +290,7 @@ function SocialLinksSection() {
         Connect With Us
       </h2>
       <p className="text-base md:text-lg text-slate-700 leading-relaxed mb-6">
-        Follow along for project updates, event announcements, and behind-the-scenes looks at what we're building.
+        Follow along for project updates, event announcements, and behind-the-scenes looks at what we&apos;re building.
       </p>
       <div className="flex flex-col gap-3">
         {SOCIAL_LINKS.map((link) => (
