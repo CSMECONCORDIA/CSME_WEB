@@ -38,13 +38,30 @@ export default async function HomePage() {
   // Get the next featured event
   const featuredEvent = upcomingEvents.find(e => e.featured) || upcomingEvents[0]
 
+  // Count queries for hero stats
+  const { totalDocs: totalProjects } = await payload.find({ collection: 'projects', limit: 0 })
+  const { totalDocs: totalUpcomingEvents } = await payload.find({
+    collection: 'events',
+    where: { date: { greater_than: new Date().toISOString() } },
+    limit: 0,
+  })
+
   return (
     <div className="relative">
       {/* Lab Status Banner */}
       <LabStatusBanner />
 
       {/* Exploded View Hero Section */}
-      <ExplodedViewScene />
+      <ExplodedViewScene
+        nextEvent={featuredEvent ? {
+          title: featuredEvent.title,
+          slug: featuredEvent.slug,
+          date: featuredEvent.date,
+          location: featuredEvent.location ?? null,
+          registrationLink: featuredEvent.registrationLink ?? null,
+        } : null}
+        stats={{ projectCount: totalProjects, upcomingEventCount: totalUpcomingEvents }}
+      />
 
       {/* Featured Event Section */}
       {featuredEvent && (
