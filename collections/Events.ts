@@ -1,7 +1,22 @@
 import type { CollectionConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
 
 export const Events: CollectionConfig = {
   slug: 'events',
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidatePath('/events')
+        revalidatePath('/', 'layout')
+      },
+    ],
+    afterDelete: [
+      async () => {
+        revalidatePath('/events')
+        revalidatePath('/', 'layout')
+      },
+    ],
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'date', 'location', 'featured'],
