@@ -4,14 +4,14 @@ import Link from 'next/link'
 import { ReactNode } from 'react'
 import { FadeIn, StaggerContainer, StaggerItem } from '../components/ScrollAnimations'
 import { GearDecoration } from '../components/GearDecoration'
-import { ParallaxElement } from '../components/ParallaxElement'
+import { formatEventDate } from '../lib/dates'
 
 export function EventsHero() {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden bg-slate-50 dark:bg-slate-900">
-      <ParallaxElement speed={0.15} className="absolute top-0 right-0 text-navy/5 dark:text-white/5">
+      <div className="absolute top-0 right-0 text-navy/5 dark:text-white/5">
         <GearDecoration size={600} spin />
-      </ParallaxElement>
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl">
@@ -45,9 +45,9 @@ export function EventsHero() {
 export function FeaturedEventSection({ children }: { children: ReactNode }) {
   return (
     <section className="py-16 bg-slate-900 relative overflow-hidden">
-      <ParallaxElement speed={0.15} className="absolute top-0 right-0 text-white/5">
+      <div className="absolute top-0 right-0 text-white/5">
         <GearDecoration size={400} spin />
-      </ParallaxElement>
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <FadeIn>
@@ -144,10 +144,10 @@ export function PastEventsSection({ events }: { events: PastEvent[] }) {
                 <div className="flex items-start gap-4">
                   <div className="w-16 flex-shrink-0 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 flex flex-col items-center justify-center p-3">
                     <span className="text-xl font-bold leading-none" style={{ fontFamily: 'var(--font-display)' }}>
-                      {new Date(event.date).toLocaleDateString('en-US', { day: 'numeric', timeZone: 'America/Toronto' })}
+                      {formatEventDate(event.date as string).day}
                     </span>
                     <span className="text-xs uppercase tracking-wider mt-1">
-                      {new Date(event.date).toLocaleDateString('en-US', { month: 'short', timeZone: 'America/Toronto' })}
+                      {formatEventDate(event.date as string).month}
                     </span>
                   </div>
                   <div className="flex-1">

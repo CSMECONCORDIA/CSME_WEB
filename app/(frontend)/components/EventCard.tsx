@@ -1,22 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Event, Media } from '@/payload-types'
-
-function formatEventDate(dateString: string) {
-  const date = new Date(dateString)
-  const tz = { timeZone: 'America/Toronto' } as const
-  return {
-    day: date.toLocaleDateString('en-US', { day: 'numeric', ...tz }),
-    month: date.toLocaleDateString('en-US', { month: 'short', ...tz }),
-    year: date.toLocaleDateString('en-US', { year: 'numeric', ...tz }),
-    time: date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', ...tz }),
-    full: date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', ...tz })
-  }
-}
-
-function isUpcoming(dateString: string) {
-  return new Date(dateString) > new Date()
-}
+import { formatEventDate, isUpcoming } from '../lib/dates'
 
 export function EventCard({ event, variant = 'default' }: { event: Event; variant?: 'default' | 'featured' }) {
   const thumbnail = event.thumbnail as Media | null

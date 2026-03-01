@@ -5,6 +5,7 @@ import { Canvas } from '@react-three/fiber'
 import { ScrollControls, Scroll, Environment } from '@react-three/drei'
 import Link from 'next/link'
 import { RobotArmAssembly } from './RobotArmAssembly'
+import { formatEventDate } from '../../lib/dates'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -180,18 +181,9 @@ function NextEventSection({
     )
   }
 
-  const eventDate = new Date(nextEvent.date)
-  const formattedDate = eventDate.toLocaleDateString('en-US', {
-    weekday: 'short',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'America/Toronto',
-  })
-  const formattedTime = eventDate.toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    timeZone: 'America/Toronto',
-  })
+  const eventDateFormatted = formatEventDate(nextEvent.date)
+  const formattedDate = eventDateFormatted.short
+  const formattedTime = eventDateFormatted.time
 
   return (
     <>

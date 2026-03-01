@@ -5,6 +5,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { GearDecoration } from '../../components'
 import type { Media } from '@/payload-types'
+import { formatEventDate, isUpcoming } from '../../lib/dates'
 
 export const dynamic = 'force-dynamic'
 
@@ -47,23 +48,6 @@ export async function generateMetadata({ params }: Props) {
     title: `${event.title} | CSME Concordia Events`,
     description: `Join us for ${event.title} at CSME Concordia.`,
   }
-}
-
-function formatEventDate(dateString: string) {
-  const date = new Date(dateString)
-  const tz = { timeZone: 'America/Toronto' } as const
-  return {
-    day: date.toLocaleDateString('en-US', { day: 'numeric', ...tz }),
-    month: date.toLocaleDateString('en-US', { month: 'short', ...tz }),
-    year: date.toLocaleDateString('en-US', { year: 'numeric', ...tz }),
-    time: date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', ...tz }),
-    weekday: date.toLocaleDateString('en-US', { weekday: 'long', ...tz }),
-    full: date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', ...tz })
-  }
-}
-
-function isUpcoming(dateString: string) {
-  return new Date(dateString) > new Date()
 }
 
 export default async function EventPage({ params }: Props) {
