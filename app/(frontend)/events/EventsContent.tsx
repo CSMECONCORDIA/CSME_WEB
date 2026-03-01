@@ -144,10 +144,10 @@ export function PastEventsSection({ events }: { events: PastEvent[] }) {
                 <div className="flex items-start gap-4">
                   <div className="w-16 flex-shrink-0 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 flex flex-col items-center justify-center p-3">
                     <span className="text-xl font-bold leading-none" style={{ fontFamily: 'var(--font-display)' }}>
-                      {new Date(event.date).getUTCDate()}
+                      {new Date(event.date).toLocaleDateString('en-US', { day: 'numeric', timeZone: 'America/Toronto' })}
                     </span>
                     <span className="text-xs uppercase tracking-wider mt-1">
-                      {new Date(event.date).toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })}
+                      {new Date(event.date).toLocaleDateString('en-US', { month: 'short', timeZone: 'America/Toronto' })}
                     </span>
                   </div>
                   <div className="flex-1">

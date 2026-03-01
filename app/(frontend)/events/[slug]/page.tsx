@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props) {
 
 function formatEventDate(dateString: string) {
   const date = new Date(dateString)
-  const tz = { timeZone: 'UTC' } as const
+  const tz = { timeZone: 'America/Toronto' } as const
   return {
     day: date.toLocaleDateString('en-US', { day: 'numeric', ...tz }),
     month: date.toLocaleDateString('en-US', { month: 'short', ...tz }),

@@ -185,10 +185,12 @@ function NextEventSection({
     weekday: 'short',
     month: 'long',
     day: 'numeric',
+    timeZone: 'America/Toronto',
   })
   const formattedTime = eventDate.toLocaleTimeString('en-US', {
     hour: 'numeric',
     minute: '2-digit',
+    timeZone: 'America/Toronto',
   })
 
   return (
