@@ -74,6 +74,11 @@ export const Projects: CollectionConfig = {
           name: 'role',
           type: 'text',
         },
+        {
+          name: 'visible',
+          type: 'checkbox',
+          defaultValue: true,
+        },
       ],
     },
     {
