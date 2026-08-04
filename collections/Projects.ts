@@ -75,7 +75,7 @@ export const Projects: CollectionConfig = {
           type: 'text',
         },
         {
-          name: 'visible',
+          name: 'visibility',
           type: 'checkbox',
           defaultValue: true,
         },
