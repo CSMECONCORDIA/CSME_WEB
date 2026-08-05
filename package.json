@@ -16,6 +16,7 @@
     "@payloadcms/ui": "^3.69.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
+    "@vercel/blob": "^2.6.1",
     "framer-motion": "^12.23.26",
     "graphql": "^16.8.1",
     "next": "15.4.10",

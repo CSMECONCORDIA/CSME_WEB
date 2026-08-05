@@ -4,7 +4,6 @@ import path from "path";
 import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
-
 import { Users } from "./collections/Users.ts";
 import { Media } from "./collections/Media.ts";
 import { Projects } from "./collections/Projects.ts";
@@ -28,7 +27,8 @@ export default buildConfig({
   },
   db: sqliteAdapter({
 	  client: {
-    url: process.env.DATABASE_URL!,
+    url: process.env.DATABASE_URL || `file:${path.resolve(dirname, 'csme-locale.db')}`,
+    authToken: process.env.TURSO_AUTH_TOKEN,
 	  },
   }),
   sharp,
