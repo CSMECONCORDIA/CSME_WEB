@@ -28,7 +28,7 @@ export default buildConfig({
   },
   db: sqliteAdapter({
 	  client: {
-    url: process.env.DATABASE_URL || "",
+    url: process.env.DATABASE_URL!,
 	  },
   }),
   sharp,
