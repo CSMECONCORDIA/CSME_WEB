@@ -28,7 +28,7 @@ export default buildConfig({
   },
   db: sqliteAdapter({
 	  client: {
-    url: `file:${path.resolve(dirname, 'csme-locale.db')}`,
+    url: process.env.DATABASE_URL || "",
 	  },
   }),
   sharp,
