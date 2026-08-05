@@ -27,10 +27,9 @@ export default buildConfig({
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URL || "",
-      authToken: process.env.TURSO_AUTH_TOKEN,
-    },
+	  client: {
+    url: `file:${path.resolve(dirname, 'csme-locale.db')}`,
+	  },
   }),
   sharp,
   plugins: [],

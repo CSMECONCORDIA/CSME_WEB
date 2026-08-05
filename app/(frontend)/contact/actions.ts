@@ -1,5 +1,6 @@
 'use server'
-
+import { Resend } from 'resend'
+const resend = new Resend(process.env.RESEND_API_KEY)
 export async function sendContactEmail(formData: FormData) {
   const name = formData.get('name') as string
   const email = formData.get('email') as string
@@ -18,41 +19,27 @@ export async function sendContactEmail(formData: FormData) {
   }
 
   try {
-    // Here you would integrate with your email service
-    // Options include:
-    // 1. Resend (https://resend.com) - Modern email API
-    // 2. Nodemailer with SMTP
-    // 3. SendGrid
-    // 4. AWS SES
-
-    // Example with Resend (you'll need to install and configure it):
-    // import { Resend } from 'resend'
-    // const resend = new Resend(process.env.RESEND_API_KEY)
-    //
-    // await resend.emails.send({
-    //   from: 'CSME Website <noreply@csme-concordia.ca>',
-    //   to: ['csme@concordia.ca'],
-    //   replyTo: email,
-    //   subject: `[CSME Contact] ${subject} - from ${name}`,
-    //   text: `
-    //     Name: ${name}
-    //     Email: ${email}
-    //     Subject: ${subject}
-    //
-    //     Message:
-    //     ${message}
-    //   `,
-    // })
-
-    // For now, we'll log the submission and return success
-    // Replace this with actual email sending in production
-    console.log('Contact form submission:', {
-      name,
-      email,
-      subject,
-      message,
-      timestamp: new Date().toISOString(),
+    const { error } = await resend.emails.send({
+		from: 'CSME Website <onboarding@resend.dev>',
+		to: ['it.csme@ecaconcordia.ca'],
+		replyTo: email,
+		subject: `[CSME Contact] ${subject} - from ${name}`,
+		text: `
+		Name: ${name}
+		Email: ${email}
+		Subject: ${subject}
+		
+		Message:
+		${message}
+		`,
     })
+	  if (error) {
+    console.error('Resend error:', error)
+    return {
+      success: false,
+      error: 'Failed to send message. Please try again later.',
+    }
+  }
 
     // Simulate a small delay for better UX
     await new Promise(resolve => setTimeout(resolve, 1000))
