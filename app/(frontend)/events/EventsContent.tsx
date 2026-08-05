@@ -114,7 +114,7 @@ export function EventCardWrapper({ children }: { children: ReactNode }) {
 }
 
 interface PastEvent {
-  id: string
+  id: number
   title: string
   date: string
   location?: string | null

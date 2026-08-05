@@ -5,6 +5,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { GearDecoration } from '../../components'
 import type { Media } from '@/payload-types'
+import { createElement, type ElementType } from 'react'
 
 // Lexical rich text types
 interface LexicalTextNode {
@@ -268,8 +269,8 @@ export default async function EventPage({ params }: Props) {
                 }
                 if (node.type === 'heading') {
                   const text = (node.children as LexicalTextNode[])?.map((child) => child.text || '').join('') || ''
-                  const Tag = `h${node.tag || 3}` as keyof JSX.IntrinsicElements
-                  return <Tag key={index} className="text-slate-900 font-bold mt-8 mb-4">{text}</Tag>
+                  const Tag = `h${node.tag || 3}` as ElementType
+                  return createElement(Tag, { key: index, className: "text-slate-900 font-bold mt-8 mb-4" }, text)
                 }
                 if (node.type === 'list') {
                   const ListTag = node.listType === 'number' ? 'ol' : 'ul'
