@@ -12,6 +12,8 @@ import {
   AnimatedEventsList,
 } from './components'
 
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })

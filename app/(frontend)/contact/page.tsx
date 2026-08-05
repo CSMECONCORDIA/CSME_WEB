@@ -11,6 +11,8 @@ export const metadata = {
   description: 'Get in touch with CSME Concordia - join our community, ask questions, or share your ideas.',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default function ContactPage() {
   return (
     <div>
