@@ -91,8 +91,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'lab-status': LabStatus;
+  };
+  globalsSelect: {
+    'lab-status': LabStatusSelect<false> | LabStatusSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -442,6 +446,30 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lab-status".
+ */
+export interface LabStatus {
+  id: number;
+  isOpen: boolean;
+  message?: string | null;
+  updatedBy?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lab-status_select".
+ */
+export interface LabStatusSelect<T extends boolean = true> {
+  isOpen?: T;
+  message?: T;
+  updatedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

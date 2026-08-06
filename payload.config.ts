@@ -8,7 +8,7 @@ import { Users } from "./collections/Users.ts";
 import { Media } from "./collections/Media.ts";
 import { Projects } from "./collections/Projects.ts";
 import { Events } from "./collections/Events.ts";
-
+import { LabStatus } from "./globals/LabStatus.ts";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -25,6 +25,9 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
+  globals: [
+    LabStatus,
+  ],
   db: sqliteAdapter({
 	  client: {
     url: process.env.DATABASE_URL || `file:${path.resolve(dirname, 'csme-locale.db')}`,
