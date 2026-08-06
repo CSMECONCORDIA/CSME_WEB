@@ -34,10 +34,10 @@ export async function sendContactEmail(formData: FormData) {
 		`,
     })
 	  if (error) {
-    console.error('Resend error:', error)
+    console.error('Resend error:', JSON.stringify(error, null, 2))
     return {
       success: false,
-      error: 'Failed to send message. Please try again later.',
+      error: error.message || 'Failed to send message. Please try again later.',
     }
   }
 

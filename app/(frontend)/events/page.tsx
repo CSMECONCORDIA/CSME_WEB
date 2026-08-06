@@ -16,6 +16,8 @@ export const metadata = {
   description: 'Stay up to date with CSME Concordia events - workshops, networking nights, competitions, and more.',
 }
 
+export const revalidate = 60
+
 export default async function EventsPage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
