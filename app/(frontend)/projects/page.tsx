@@ -9,7 +9,6 @@ import {
   ProjectsCTA,
 } from './ProjectsContent'
 
-export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Projects | CSME Concordia',

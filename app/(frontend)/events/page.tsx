@@ -10,7 +10,6 @@ import {
   EventsCTA,
 } from './EventsContent'
 
-export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Events | CSME Concordia',

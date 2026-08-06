@@ -14,7 +14,7 @@
  *   DISCORD_GUILD_ID  - (Optional) Your server ID for guild-specific commands
  */
 
-require('dotenv').config();
+import 'dotenv/config';
 
 const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID;
