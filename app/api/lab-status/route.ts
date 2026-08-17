@@ -68,6 +68,25 @@ export async function POST(request: NextRequest) {
       },
     })
 
+    const discordWebhook = process.env.DISCORD_LAB_WEBHOOK_URL
+    if (discordWebhook) {
+      const statusText = labStatus.isOpen ? 'OPEN' : 'CLOSED'
+      const statusEmoji = labStatus.isOpen ? '🟢' : '🔴'
+    try{
+    await fetch(discordWebhook, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        content: `${statusEmoji} Lab is ${statusText}! \n ${labStatus.message} \n Updated by: ${labStatus.updatedBy}`,
+      })
+    })
+    } catch(error) {
+      console.error('Failed to send Discord notification:', error)
+    }
+  }
+  
     return NextResponse.json({
       success: true,
       status: {
