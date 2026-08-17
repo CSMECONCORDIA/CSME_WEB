@@ -4,7 +4,7 @@ import config from '@payload-config'
 
 // Secret key for Discord bot authentication
 const DISCORD_BOT_SECRET = process.env.DISCORD_BOT_SECRET
-
+const ESP32_LAB_SECRET = process.env.ESP32_LAB_SECRET
 export async function GET() {
   try {
     const payload = await getPayload({ config })
@@ -32,15 +32,15 @@ export async function POST(request: NextRequest) {
   try {
     // Verify the request is from the Discord bot
     const authHeader = request.headers.get('Authorization')
-
-    if (!DISCORD_BOT_SECRET) {
+    
+    if (!DISCORD_BOT_SECRET && !ESP32_LAB_SECRET) {
       return NextResponse.json(
         { error: 'Lab status updates are not configured' },
         { status: 503 }
       )
     }
 
-    if (!authHeader || authHeader !== `Bearer ${DISCORD_BOT_SECRET}`) {
+    if (!authHeader || (authHeader !== `Bearer ${DISCORD_BOT_SECRET}` && authHeader !== `Bearer ${ESP32_LAB_SECRET}`)) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
