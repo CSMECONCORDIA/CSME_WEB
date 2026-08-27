@@ -71,6 +71,9 @@ export interface Config {
     media: Media;
     projects: Project;
     events: Event;
+    checkouts: Checkout;
+    customers: Customer;
+    'inventory-items': InventoryItem;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +85,9 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    checkouts: CheckoutsSelect<false> | CheckoutsSelect<true>;
+    customers: CustomersSelect<false> | CustomersSelect<true>;
+    'inventory-items': InventoryItemsSelect<false> | InventoryItemsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -246,6 +252,102 @@ export interface Event {
   createdAt: string;
 }
 /**
+ * Records of items checked out by students
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "checkouts".
+ */
+export interface Checkout {
+  id: number;
+  customer: number | Customer;
+  item: number | InventoryItem;
+  quantity: number;
+  status: 'checked-out' | 'returned' | 'overdue' | 'lost' | 'damaged';
+  checkedOutAt: string;
+  dueDate: string;
+  returnedAt?: string | null;
+  /**
+   * Notes about this checkout (condition, special instructions, etc.)
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Lab students who can check out inventory items
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customers".
+ */
+export interface Customer {
+  id: number;
+  /**
+   * Student card barcode ID
+   */
+  cardId: string;
+  name: string;
+  /**
+   * Student email address
+   */
+  email?: string | null;
+  /**
+   * Contact phone number
+   */
+  phone?: string | null;
+  /**
+   * Additional notes about this customer
+   */
+  notes?: string | null;
+  status: 'active' | 'suspended' | 'inactive';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Lab inventory items available for checkout
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inventory-items".
+ */
+export interface InventoryItem {
+  id: number;
+  name: string;
+  /**
+   * Unique barcode for scanning
+   */
+  barcode: string;
+  description?: string | null;
+  category:
+    | 'hand-tools'
+    | 'power-tools'
+    | 'measuring'
+    | 'safety'
+    | 'electronics'
+    | 'microcontrollers'
+    | '3d-printing'
+    | 'materials'
+    | 'consumables'
+    | 'other';
+  /**
+   * Total quantity owned
+   */
+  quantityTotal: number;
+  /**
+   * Quantity currently available for checkout
+   */
+  quantityAvailable: number;
+  /**
+   * Storage location in the lab
+   */
+  location?: string | null;
+  image?: (number | null) | Media;
+  /**
+   * Maximum number of days item can be checked out
+   */
+  maxCheckoutDays?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -284,6 +386,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'events';
         value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'checkouts';
+        value: number | Checkout;
+      } | null)
+    | ({
+        relationTo: 'customers';
+        value: number | Customer;
+      } | null)
+    | ({
+        relationTo: 'inventory-items';
+        value: number | InventoryItem;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -404,6 +518,53 @@ export interface EventsSelect<T extends boolean = true> {
   location?: T;
   registrationLink?: T;
   featured?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "checkouts_select".
+ */
+export interface CheckoutsSelect<T extends boolean = true> {
+  customer?: T;
+  item?: T;
+  quantity?: T;
+  status?: T;
+  checkedOutAt?: T;
+  dueDate?: T;
+  returnedAt?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customers_select".
+ */
+export interface CustomersSelect<T extends boolean = true> {
+  cardId?: T;
+  name?: T;
+  email?: T;
+  phone?: T;
+  notes?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inventory-items_select".
+ */
+export interface InventoryItemsSelect<T extends boolean = true> {
+  name?: T;
+  barcode?: T;
+  description?: T;
+  category?: T;
+  quantityTotal?: T;
+  quantityAvailable?: T;
+  location?: T;
+  image?: T;
+  maxCheckoutDays?: T;
   updatedAt?: T;
   createdAt?: T;
 }

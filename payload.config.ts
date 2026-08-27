@@ -9,6 +9,9 @@ import { Media } from "./collections/Media.ts";
 import { Projects } from "./collections/Projects.ts";
 import { Events } from "./collections/Events.ts";
 import { LabStatus } from "./globals/LabStatus.ts";
+import { Checkouts } from "./collections/Checkouts.ts";
+import { Customers } from "./collections/Customers.ts";
+import { InventoryItems } from "./collections/InventoryItems.ts";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -20,7 +23,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Projects, Events],
+  collections: [Users, Media, Projects, Events, Checkouts, Customers, InventoryItems, ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
