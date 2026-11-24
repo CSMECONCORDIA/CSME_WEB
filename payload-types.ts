@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     projects: Project;
     events: Event;
+    blog: Blog;
     checkouts: Checkout;
     customers: Customer;
     'inventory-items': InventoryItem;
@@ -85,6 +86,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    blog: BlogSelect<false> | BlogSelect<true>;
     checkouts: CheckoutsSelect<false> | CheckoutsSelect<true>;
     customers: CustomersSelect<false> | CustomersSelect<true>;
     'inventory-items': InventoryItemsSelect<false> | InventoryItemsSelect<true>;
@@ -99,9 +101,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'lab-status': LabStatus;
+    'lab-checkout-settings': LabCheckoutSetting;
   };
   globalsSelect: {
     'lab-status': LabStatusSelect<false> | LabStatusSelect<true>;
+    'lab-checkout-settings': LabCheckoutSettingsSelect<false> | LabCheckoutSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -252,6 +256,45 @@ export interface Event {
   createdAt: string;
 }
 /**
+ * Posts shown on the /blog page. Enter a title and text; the date and web address are filled in for you.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog".
+ */
+export interface Blog {
+  id: number;
+  title: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Web address: /blog/<slug>. Leave empty to create it from the title.
+   */
+  slug?: string | null;
+  /**
+   * Leave empty to use today's date.
+   */
+  postDate?: string | null;
+  /**
+   * Hides the post from the website.
+   */
+  archived?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Records of items checked out by students
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -386,6 +429,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'events';
         value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'blog';
+        value: number | Blog;
       } | null)
     | ({
         relationTo: 'checkouts';
@@ -523,6 +570,19 @@ export interface EventsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog_select".
+ */
+export interface BlogSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  slug?: T;
+  postDate?: T;
+  archived?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "checkouts_select".
  */
 export interface CheckoutsSelect<T extends boolean = true> {
@@ -622,12 +682,56 @@ export interface LabStatus {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lab-checkout-settings".
+ */
+export interface LabCheckoutSetting {
+  id: number;
+  /**
+   * If unchecked, the /checkout page stays locked until you set a password below.
+   */
+  passwordIsSet?: boolean | null;
+  /**
+   * Type a new password and save to change it. Leave empty to keep the current one. It is stored hashed and this box clears after saving.
+   */
+  newPassword?: string | null;
+  passwordHash?: string | null;
+  idleTimeoutMinutes: number;
+  warningSeconds: number;
+  /**
+   * Used when an item has no 'Max Checkout Days' of its own.
+   */
+  defaultCheckoutDays: number;
+  /**
+   * No loan is ever longer than this, whatever the item says.
+   */
+  maxCheckoutDays: number;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "lab-status_select".
  */
 export interface LabStatusSelect<T extends boolean = true> {
   isOpen?: T;
   message?: T;
   updatedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lab-checkout-settings_select".
+ */
+export interface LabCheckoutSettingsSelect<T extends boolean = true> {
+  passwordIsSet?: T;
+  newPassword?: T;
+  passwordHash?: T;
+  idleTimeoutMinutes?: T;
+  warningSeconds?: T;
+  defaultCheckoutDays?: T;
+  maxCheckoutDays?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

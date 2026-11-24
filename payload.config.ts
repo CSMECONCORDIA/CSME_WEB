@@ -8,7 +8,9 @@ import { Users } from "./collections/Users.ts";
 import { Media } from "./collections/Media.ts";
 import { Projects } from "./collections/Projects.ts";
 import { Events } from "./collections/Events.ts";
+import { Blog } from "./collections/Blog.ts";
 import { LabStatus } from "./globals/LabStatus.ts";
+import { LabCheckoutSettings } from "./globals/LabCheckoutSettings.ts";
 import { Checkouts } from "./collections/Checkouts.ts";
 import { Customers } from "./collections/Customers.ts";
 import { InventoryItems } from "./collections/InventoryItems.ts";
@@ -23,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Projects, Events, Checkouts, Customers, InventoryItems, ],
+  collections: [Users, Media, Projects, Events, Blog, Checkouts, Customers, InventoryItems, ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
@@ -31,8 +33,12 @@ export default buildConfig({
   },
   globals: [
     LabStatus,
+    LabCheckoutSettings,
   ],
   db: sqliteAdapter({
+    // Dev mode may only change tables in a local database file. A remote (Turso)
+    // database is changed by running the migrations in scripts/ instead.
+    push: !/^(libsql|https?|wss?):/.test(process.env.DATABASE_URL || ''),
 	  client: {
     url: process.env.DATABASE_URL || `file:${path.resolve(dirname, 'csme-locale.db')}`,
     authToken: process.env.TURSO_AUTH_TOKEN,

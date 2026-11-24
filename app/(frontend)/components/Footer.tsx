@@ -10,10 +10,12 @@ const footerLinks = {
     { href: '/about', label: 'About' },
     { href: '/projects', label: 'Projects' },
     { href: '/events', label: 'Events' },
+    { href: '/blog', label: 'Blog' },
     { href: '/contact', label: 'Contact' },
   ],
   resources: [
     { href: '/admin', label: 'Admin Portal' },
+    { href: '/checkout', label: 'Lab Checkout' },
     { href: 'https://www.concordia.ca/ginacody/mechanical-industrial-aerospace-eng.html', label: 'MIE Department', external: true },
     { href: 'https://www.concordia.ca', label: 'Concordia University', external: true },
   ],

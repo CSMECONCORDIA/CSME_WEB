@@ -8,7 +8,9 @@ export const Customers: CollectionConfig = {
     description: 'Lab students who can check out inventory items',
   },
   access: {
-    read: () => true,
+    // Student data: admins only. The /checkout pages and inventory API use the
+    // server-side Local API, so they don't need public read access.
+    read: ({ req }) => Boolean(req.user),
   },
   fields: [
     {

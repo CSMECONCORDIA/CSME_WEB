@@ -416,6 +416,43 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem;
 }
 
+/* Blog posts: formatting that the base styles reset */
+.blog-post h1, .blog-post h2, .blog-post h3, .blog-post h4 {
+  color: #0f172a;
+  margin: 2rem 0 1rem;
+}
+
+:root.dark .blog-post h1, :root.dark .blog-post h2, :root.dark .blog-post h3, :root.dark .blog-post h4 {
+  color: white;
+}
+
+.blog-post h1 { font-size: 2.25rem; }
+.blog-post h2 { font-size: 1.875rem; }
+.blog-post h3 { font-size: 1.5rem; }
+.blog-post h4 { font-size: 1.25rem; }
+
+.blog-post ul { list-style: disc; }
+.blog-post ol { list-style: decimal; }
+
+.blog-post a {
+  color: #1e4b7a;
+  text-decoration: underline;
+}
+
+:root.dark .blog-post a { color: #93c5fd; }
+
+.blog-post blockquote {
+  border-left: 4px solid #1e4b7a;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+}
+
+.blog-post img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Mobile menu */
 .mobile-menu {
   position: fixed;
